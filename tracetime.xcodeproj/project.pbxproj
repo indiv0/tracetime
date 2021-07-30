@@ -13,7 +13,47 @@
 		C48546B526B3B6DE00065AE0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C48546B426B3B6DE00065AE0 /* Preview Assets.xcassets */; };
 		C48546B726B3B6DE00065AE0 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48546B626B3B6DE00065AE0 /* Persistence.swift */; };
 		C48546BA26B3B6DE00065AE0 /* tracetime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C48546B826B3B6DE00065AE0 /* tracetime.xcdatamodeld */; };
+		C48546C126B3BCC800065AE0 /* AddRecordSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48546C026B3BCC800065AE0 /* AddRecordSheet.swift */; };
+		C48546C426B3C11800065AE0 /* Record+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48546C226B3C11800065AE0 /* Record+CoreDataClass.swift */; };
+		C48546C526B3C11800065AE0 /* Record+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48546C326B3C11800065AE0 /* Record+CoreDataProperties.swift */; };
+		C48546C726B3C63600065AE0 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48546C626B3C63600065AE0 /* Date.swift */; };
+		C488B95D26B40A0000A0196F /* EditRecordSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = C488B95C26B40A0000A0196F /* EditRecordSheet.swift */; };
+		C488B96526B43E2D00A0196F /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C488B96426B43E2C00A0196F /* WidgetKit.framework */; };
+		C488B96726B43E2D00A0196F /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C488B96626B43E2D00A0196F /* SwiftUI.framework */; };
+		C488B96A26B43E2D00A0196F /* tracetimeWidget.swift in Sources */ = {isa = PBXBuildFile; fileRef = C488B96926B43E2D00A0196F /* tracetimeWidget.swift */; };
+		C488B96C26B43E2E00A0196F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C488B96B26B43E2E00A0196F /* Assets.xcassets */; };
+		C488B97026B43E2E00A0196F /* tracetimeWidgetExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = C488B96226B43E2C00A0196F /* tracetimeWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		C488B97826B4431800A0196F /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48546B626B3B6DE00065AE0 /* Persistence.swift */; };
+		C488B97926B4436C00A0196F /* Record+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48546C226B3C11800065AE0 /* Record+CoreDataClass.swift */; };
+		C488B97A26B4439400A0196F /* Record+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48546C326B3C11800065AE0 /* Record+CoreDataProperties.swift */; };
+		C488B97B26B443E200A0196F /* tracetime.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = C48546B826B3B6DE00065AE0 /* tracetime.xcdatamodeld */; };
+		C48E9BF526B4532E006221BD /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48E9BF426B4532E006221BD /* AppGroup.swift */; };
+		C48E9BF626B4532E006221BD /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48E9BF426B4532E006221BD /* AppGroup.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C488B96E26B43E2E00A0196F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C48546A226B3B6DD00065AE0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C488B96126B43E2C00A0196F;
+			remoteInfo = tracetimeWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		C488B97426B43E2E00A0196F /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				C488B97026B43E2E00A0196F /* tracetimeWidgetExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		C48546AA26B3B6DD00065AE0 /* tracetime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tracetime.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -23,6 +63,20 @@
 		C48546B426B3B6DE00065AE0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C48546B626B3B6DE00065AE0 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		C48546B926B3B6DE00065AE0 /* tracetime.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = tracetime.xcdatamodel; sourceTree = "<group>"; };
+		C48546C026B3BCC800065AE0 /* AddRecordSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordSheet.swift; sourceTree = "<group>"; };
+		C48546C226B3C11800065AE0 /* Record+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Record+CoreDataClass.swift"; sourceTree = "<group>"; };
+		C48546C326B3C11800065AE0 /* Record+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Record+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		C48546C626B3C63600065AE0 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		C488B95C26B40A0000A0196F /* EditRecordSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditRecordSheet.swift; sourceTree = "<group>"; };
+		C488B96226B43E2C00A0196F /* tracetimeWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = tracetimeWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		C488B96426B43E2C00A0196F /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		C488B96626B43E2D00A0196F /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		C488B96926B43E2D00A0196F /* tracetimeWidget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = tracetimeWidget.swift; sourceTree = "<group>"; };
+		C488B96B26B43E2E00A0196F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C488B96D26B43E2E00A0196F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C48E9BF226B452A2006221BD /* tracetime.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = tracetime.entitlements; sourceTree = "<group>"; };
+		C48E9BF326B452EE006221BD /* tracetimeWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = tracetimeWidgetExtension.entitlements; sourceTree = "<group>"; };
+		C48E9BF426B4532E006221BD /* AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,13 +87,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C488B95F26B43E2C00A0196F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C488B96726B43E2D00A0196F /* SwiftUI.framework in Frameworks */,
+				C488B96526B43E2D00A0196F /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		C48546A126B3B6DD00065AE0 = {
 			isa = PBXGroup;
 			children = (
+				C48E9BF426B4532E006221BD /* AppGroup.swift */,
+				C48E9BF326B452EE006221BD /* tracetimeWidgetExtension.entitlements */,
+				C48546C626B3C63600065AE0 /* Date.swift */,
+				C48546C226B3C11800065AE0 /* Record+CoreDataClass.swift */,
+				C48546C326B3C11800065AE0 /* Record+CoreDataProperties.swift */,
 				C48546AC26B3B6DD00065AE0 /* tracetime */,
+				C488B96826B43E2D00A0196F /* tracetimeWidget */,
+				C488B96326B43E2C00A0196F /* Frameworks */,
 				C48546AB26B3B6DD00065AE0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -48,6 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				C48546AA26B3B6DD00065AE0 /* tracetime.app */,
+				C488B96226B43E2C00A0196F /* tracetimeWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -55,8 +126,11 @@
 		C48546AC26B3B6DD00065AE0 /* tracetime */ = {
 			isa = PBXGroup;
 			children = (
+				C48E9BF226B452A2006221BD /* tracetime.entitlements */,
 				C48546AD26B3B6DD00065AE0 /* tracetimeApp.swift */,
 				C48546AF26B3B6DD00065AE0 /* ContentView.swift */,
+				C48546C026B3BCC800065AE0 /* AddRecordSheet.swift */,
+				C488B95C26B40A0000A0196F /* EditRecordSheet.swift */,
 				C48546B126B3B6DE00065AE0 /* Assets.xcassets */,
 				C48546B626B3B6DE00065AE0 /* Persistence.swift */,
 				C48546B826B3B6DE00065AE0 /* tracetime.xcdatamodeld */,
@@ -73,6 +147,25 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		C488B96326B43E2C00A0196F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C488B96426B43E2C00A0196F /* WidgetKit.framework */,
+				C488B96626B43E2D00A0196F /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C488B96826B43E2D00A0196F /* tracetimeWidget */ = {
+			isa = PBXGroup;
+			children = (
+				C488B96926B43E2D00A0196F /* tracetimeWidget.swift */,
+				C488B96B26B43E2E00A0196F /* Assets.xcassets */,
+				C488B96D26B43E2E00A0196F /* Info.plist */,
+			);
+			path = tracetimeWidget;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -83,15 +176,34 @@
 				C48546A626B3B6DD00065AE0 /* Sources */,
 				C48546A726B3B6DD00065AE0 /* Frameworks */,
 				C48546A826B3B6DD00065AE0 /* Resources */,
+				C488B97426B43E2E00A0196F /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				C488B96F26B43E2E00A0196F /* PBXTargetDependency */,
 			);
 			name = tracetime;
 			productName = tracetime;
 			productReference = C48546AA26B3B6DD00065AE0 /* tracetime.app */;
 			productType = "com.apple.product-type.application";
+		};
+		C488B96126B43E2C00A0196F /* tracetimeWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C488B97126B43E2E00A0196F /* Build configuration list for PBXNativeTarget "tracetimeWidgetExtension" */;
+			buildPhases = (
+				C488B95E26B43E2C00A0196F /* Sources */,
+				C488B95F26B43E2C00A0196F /* Frameworks */,
+				C488B96026B43E2C00A0196F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = tracetimeWidgetExtension;
+			productName = tracetimeWidgetExtension;
+			productReference = C488B96226B43E2C00A0196F /* tracetimeWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -104,6 +216,9 @@
 				LastUpgradeCheck = 1300;
 				TargetAttributes = {
 					C48546A926B3B6DD00065AE0 = {
+						CreatedOnToolsVersion = 13.0;
+					};
+					C488B96126B43E2C00A0196F = {
 						CreatedOnToolsVersion = 13.0;
 					};
 				};
@@ -122,6 +237,7 @@
 			projectRoot = "";
 			targets = (
 				C48546A926B3B6DD00065AE0 /* tracetime */,
+				C488B96126B43E2C00A0196F /* tracetimeWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
@@ -136,6 +252,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		C488B96026B43E2C00A0196F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C488B96C26B43E2E00A0196F /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -143,14 +267,41 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C48546C426B3C11800065AE0 /* Record+CoreDataClass.swift in Sources */,
 				C48546BA26B3B6DE00065AE0 /* tracetime.xcdatamodeld in Sources */,
+				C48546C126B3BCC800065AE0 /* AddRecordSheet.swift in Sources */,
+				C488B95D26B40A0000A0196F /* EditRecordSheet.swift in Sources */,
+				C48546C726B3C63600065AE0 /* Date.swift in Sources */,
+				C48E9BF526B4532E006221BD /* AppGroup.swift in Sources */,
 				C48546B726B3B6DE00065AE0 /* Persistence.swift in Sources */,
 				C48546B026B3B6DD00065AE0 /* ContentView.swift in Sources */,
 				C48546AE26B3B6DD00065AE0 /* tracetimeApp.swift in Sources */,
+				C48546C526B3C11800065AE0 /* Record+CoreDataProperties.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C488B95E26B43E2C00A0196F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C488B97A26B4439400A0196F /* Record+CoreDataProperties.swift in Sources */,
+				C48E9BF626B4532E006221BD /* AppGroup.swift in Sources */,
+				C488B97926B4436C00A0196F /* Record+CoreDataClass.swift in Sources */,
+				C488B97B26B443E200A0196F /* tracetime.xcdatamodeld in Sources */,
+				C488B96A26B43E2D00A0196F /* tracetimeWidget.swift in Sources */,
+				C488B97826B4431800A0196F /* Persistence.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C488B96F26B43E2E00A0196F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C488B96126B43E2C00A0196F /* tracetimeWidgetExtension */;
+			targetProxy = C488B96E26B43E2E00A0196F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		C48546BB26B3B6DE00065AE0 /* Debug */ = {
@@ -272,8 +423,10 @@
 		C48546BE26B3B6DE00065AE0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = tracetime/tracetime.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"tracetime/Preview Content\"";
@@ -302,8 +455,10 @@
 		C48546BF26B3B6DE00065AE0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = tracetime/tracetime.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"tracetime/Preview Content\"";
@@ -329,6 +484,64 @@
 			};
 			name = Release;
 		};
+		C488B97226B43E2E00A0196F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = tracetimeWidgetExtension.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6978RNFWWL;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = tracetimeWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = tracetimeWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.frecency.tracetime.tracetimeWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C488B97326B43E2E00A0196F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_ENTITLEMENTS = tracetimeWidgetExtension.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6978RNFWWL;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = tracetimeWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = tracetimeWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.frecency.tracetime.tracetimeWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -346,6 +559,15 @@
 			buildConfigurations = (
 				C48546BE26B3B6DE00065AE0 /* Debug */,
 				C48546BF26B3B6DE00065AE0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C488B97126B43E2E00A0196F /* Build configuration list for PBXNativeTarget "tracetimeWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C488B97226B43E2E00A0196F /* Debug */,
+				C488B97326B43E2E00A0196F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

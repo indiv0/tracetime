@@ -9,69 +9,113 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
+    
+    enum ActiveSheet: Identifiable {
+        case create, edit(record: Record)
+        
+        var id: Int {
+            switch self {
+            case .create: return 1
+            case .edit: return 2
+            }
+        }
+    }
+    
     @Environment(\.managedObjectContext) private var viewContext
-
+    
     @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
-
+        entity: Record.entity(),
+        sortDescriptors: [NSSortDescriptor(keyPath: \Record.startTime, ascending: false)]
+    ) var records: FetchedResults<Record>
+    
+    var fmt: DateFormatter {
+        let tmp = DateFormatter()
+        tmp.dateStyle = .short
+        return tmp
+    }
+    
+    @State var activeSheet: ActiveSheet?
+    
     var body: some View {
-        List {
-            ForEach(items) { item in
-                Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+        NavigationView {
+            List {
+                let recordsDict = groupByDate(records)
+                ForEach(recordsDict.indices, id: \.self) { i in
+                    Section(header: Text(self.fmt.string(from: recordsDict[i][0].startTime))) {
+                        ForEach(recordsDict[i].indices, id: \.self) { j in
+                            HStack {
+                                    VStack(alignment: .leading) {
+                                        Text("\(recordsDict[i][j].activity)")
+                                            .font(.headline)
+                                        Text("\(recordsDict[i][j].startTime...recordsDict[i][j].endTime)")
+                                            .font(.subheadline)
+                                    }
+                                    Spacer()
+                                    Button(action: {
+                                        activeSheet = .edit(record: recordsDict[i][j])
+                                    }) {
+                                        Image(systemName: "pencil")
+                                            .imageScale(.large)
+                                            .foregroundColor(.blue)
+                                    }
+                            }
+                            .frame(height: 50)
+                        }
+                    }
+                }
+                .onDelete { indexSet in
+                    for index in indexSet {
+                        viewContext.delete(records[index])
+                    }
+                    do {
+                        try viewContext.save()
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
             }
-            .onDelete(perform: deleteItems)
-        }
-        .toolbar {
-            #if os(iOS)
-            EditButton()
-            #endif
-
-            Button(action: addItem) {
-                Label("Add Item", systemImage: "plus")
+            .listStyle(PlainListStyle())
+            .navigationTitle("Records")
+            .navigationBarItems(trailing: Button(action: {
+                activeSheet = .create
+            }, label: {
+                Image(systemName: "plus.circle")
+                    .imageScale(.large)
+            }))
+            .sheet(item: $activeSheet) { item in
+                switch item {
+                case .create:
+                    let now = Date();
+                    if let record = records.first {
+                        AddRecordSheet(
+                            activity: record.activity,
+                            startTime: record.endTime,
+                            endTime: now > record.endTime ? now : record.endTime
+                        )
+                    } else {
+                        AddRecordSheet(activity: "", startTime: now, endTime: now)
+                    }
+                case .edit(let value):
+                    EditRecordSheet(record: value, last: records.first!.id! == value.id!)
+                }
             }
         }
     }
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
+    func groupByDate(_ result: FetchedResults<Record>) -> [[Record]] {
+        return Dictionary(grouping: result) { (element: Record) in
+            fmt.string(from: element.startTime)
+        }.values.sorted() { $0[0].startTime > $1[0].startTime }
     }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
-    }
+    
+    //func extendRecord(record: Record) {
+    //    let newEndTime = Date()
+    //    viewContext.performAndWait {
+    //        record.endTime = newEndTime
+    //        try? viewContext.save()
+    //    }
+    //}
 }
-
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
-}()
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
