@@ -105,12 +105,12 @@ struct tracetimeWidgetEntryView : View {
                     Divider()
                     HStack {
                         Text(paddedActivities[i])
-                            .font(.headline)
+                            .fontWeight(.semibold)
                             .foregroundColor(.blue)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                         Divider()
                         Text(paddedActivities[i + 1])
-                            .font(.headline)
+                            .fontWeight(.semibold)
                             .foregroundColor(.blue)
                             .frame(maxWidth: .infinity, maxHeight: .infinity)
                     }
