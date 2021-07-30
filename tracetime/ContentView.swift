@@ -104,7 +104,7 @@ struct ContentView: View {
                     EditRecordSheet(record: value, last: records.first!.id! == value.id!)
                 }
             }
-        }
+        }.navigationViewStyle(StackNavigationViewStyle())
     }
 
     func groupByDate(_ result: FetchedResults<Record>) -> [[Record]] {

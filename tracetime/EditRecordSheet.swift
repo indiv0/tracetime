@@ -50,7 +50,7 @@ struct EditRecordSheet: View {
                     }
                 }
             }
-            .navigationBarTitle("Edit Record")
+            .navigationTitle("Edit Record")
             .navigationBarItems(leading: Button("Cancel") {
                 presentationMode.wrappedValue.dismiss()
             }, trailing: Button("Save") {
@@ -66,6 +66,7 @@ struct EditRecordSheet: View {
                 presentationMode.wrappedValue.dismiss()
             })
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 

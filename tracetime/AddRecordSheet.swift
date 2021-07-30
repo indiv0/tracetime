@@ -34,7 +34,7 @@ struct AddRecordSheet: View {
                     DatePicker("End", selection: $endTime, in: startTime...Date())
                 }
             }
-            .navigationBarTitle("Add Record")
+            .navigationTitle("Add Record")
             .navigationBarItems(leading: Button("Cancel") {
                 presentationMode.wrappedValue.dismiss()
             }, trailing: Button("Done") {
@@ -55,6 +55,7 @@ struct AddRecordSheet: View {
                 }
             })
         }
+        .navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
