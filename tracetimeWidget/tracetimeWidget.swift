@@ -118,7 +118,6 @@ struct tracetimeWidgetEntryView : View {
             }
         }
         .padding(8)
-        //.aspectRatio(contentMode: .fit)
     }
 }
 
