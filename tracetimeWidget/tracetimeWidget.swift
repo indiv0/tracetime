@@ -11,14 +11,11 @@ import SwiftUI
 
 struct Provider: TimelineProvider {
     
-    //let persistenceController = PersistenceController.shared
-    //@Environment(\.managedObjectContext) private var viewContext
     var viewContext: NSManagedObjectContext
     var record: Record?
     var activities: [String]
     
     init(viewContext: NSManagedObjectContext) {
-    //init() {
         self.viewContext = viewContext
         print("Starting Provider with viewContext \(viewContext)")
         let records = Provider.loadData(viewContext: viewContext)
@@ -43,11 +40,6 @@ struct Provider: TimelineProvider {
         let record = records.first
         let activities = records.map { $0.activity }.unique
         
-        //@FetchRequest(
-        //    entity: Record.entity(),
-        //    sortDescriptors: [NSSortDescriptor(keyPath: \Record.startTime, ascending: false)]
-        //) var records: FetchedResults<Record>
-        // Generate a timeline consisting of five entries an hour apart, starting from the current date.
         let currentDate = Date()
         for hourOffset in 0 ..< 5 {
             let entryDate = Calendar.current.date(byAdding: .hour, value: hourOffset, to: currentDate)!
@@ -61,7 +53,7 @@ struct Provider: TimelineProvider {
     
     static func loadData(viewContext: NSManagedObjectContext) -> [Record] {
         let request = NSFetchRequest<Record>(entityName: "Record")
-        //request.fetchLimit = 20
+        request.sortDescriptors = [NSSortDescriptor(keyPath: \Record.startTime, ascending: false)]
         do {
             let result = try viewContext.fetch(request)
             return result
@@ -79,39 +71,60 @@ struct SimpleEntry: TimelineEntry {
 }
 
 struct tracetimeWidgetEntryView : View {
+    @Environment(\.widgetFamily) var widgetFamily
+    
     var entry: Provider.Entry
 
     var body: some View {
+        let targetCount: Int = {
+            switch self.widgetFamily {
+            case .systemMedium: return 4
+            case .systemSmall: return 4
+            default: return 8
+            }
+        }();
+        // https://forums.swift.org/t/padding-arrays/41041/2
+        let paddedActivities = entry.activities + Array(repeating: "", count: max(targetCount - entry.activities.count, 0))
         VStack {
-            ForEach(entry.activities.indices, id: \.self) { i in
-                Text(entry.activities[i])
+            HStack {
+                Text("TRACK AGAIN")
+                    .font(.body)
+                    .fontWeight(.heavy)
+                    .fixedSize()
+                if widgetFamily != .systemSmall {
+                    Spacer()
+                        .frame(maxWidth: .infinity)
+                    Text(entry.record!.endTime, style: .relative)
+                }
+            }
+            .padding(8)
+            .frame(height: 50)
+            VStack {
+                ForEach(Array(stride(from: 0, to: targetCount, by: 2)), id: \.self) { i in
+                    Divider()
+                    HStack {
+                        Text(paddedActivities[i])
+                            .font(.headline)
+                            .foregroundColor(.blue)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        Divider()
+                        Text(paddedActivities[i + 1])
+                            .font(.headline)
+                            .foregroundColor(.blue)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    }
+                }
             }
         }
-        //if let record = entry.record {
-        //    VStack {
-        //        HStack {
-        //            Text("Add Record:")
-        //            Text(record.endTime...entry.date)
-        //        }
-                //NavigationView {
-                    //List {
-                    //    ForEach(entry.activities.prefix(1).indices, id: \.self) { i in
-                    //        Text(entry.activities[i])
-                    //    }
-                    //}
-                //}
-                //.listStyle(PlainListStyle())
-        //    }
-        //} else {
-        //    Text("Add Record")
-        //}
+        .padding(8)
+        //.aspectRatio(contentMode: .fit)
     }
 }
 
 @main
 struct tracetimeWidget: Widget {
     let persistenceController = PersistenceController.shared
-    let kind: String = "tracetimeWidget"
+    let kind: String = "com.frecency.tracetime.tracetimeWidget"
 
     var body: some WidgetConfiguration {
         StaticConfiguration(kind: kind, provider: Provider(viewContext: persistenceController.container.viewContext)) { entry in
