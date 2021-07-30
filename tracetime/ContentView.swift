@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import WidgetKit
 
 struct ContentView: View {
     
@@ -69,6 +70,7 @@ struct ContentView: View {
                     }
                     do {
                         try viewContext.save()
+                        WidgetCenter.shared.reloadAllTimelines()
                     } catch {
                         print(error.localizedDescription)
                     }

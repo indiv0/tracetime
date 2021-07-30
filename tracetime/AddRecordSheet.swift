@@ -5,6 +5,7 @@
 //  Created by Nikita Pekin on 2021-07-30.
 //
 
+import WidgetKit
 import SwiftUI
 
 struct AddRecordSheet: View {
@@ -46,6 +47,7 @@ struct AddRecordSheet: View {
                 newRecord.endTime = self.endTime
                 do {
                     try viewContext.save()
+                    WidgetCenter.shared.reloadAllTimelines()
                     print("Record saved.")
                     presentationMode.wrappedValue.dismiss()
                 } catch {

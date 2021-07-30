@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import WidgetKit
 
 struct EditRecordSheet: View {
 
@@ -59,6 +60,7 @@ struct EditRecordSheet: View {
                 }
                 viewContext.performAndWait {
                     try? viewContext.save()
+                    WidgetCenter.shared.reloadAllTimelines()
                     print("Record edited.")
                 }
                 presentationMode.wrappedValue.dismiss()
