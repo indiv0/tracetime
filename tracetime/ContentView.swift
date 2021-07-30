@@ -89,7 +89,10 @@ struct ContentView: View {
                     if let record = records.first {
                         AddRecordSheet(
                             activity: record.activity,
-                            startTime: record.endTime,
+                            // Every task must start at least one second
+                            // after the last task ended to ensure that they
+                            // can be sorted correctly.
+                            startTime: record.endTime.addingTimeInterval(1),
                             endTime: now > record.endTime ? now : record.endTime
                         )
                     } else {
