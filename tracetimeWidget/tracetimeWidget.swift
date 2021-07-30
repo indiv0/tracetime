@@ -70,55 +70,94 @@ struct SimpleEntry: TimelineEntry {
     let activities: [String]
 }
 
+struct SmallTracetimeWidgetEntryView : View {
+    var entry: Provider.Entry
+
+    var body: some View {
+        VStack {
+            Text("TRACK AGAIN")
+                .font(.body)
+                .fontWeight(.heavy)
+                .frame(maxHeight: .infinity)
+            Divider()
+            Text(entry.record!.endTime, style: .timer)
+                .frame(maxHeight: .infinity)
+        }
+        .multilineTextAlignment(.center)
+        .padding(8)
+        .widgetURL(createActivityUrl(activity: entry.record!.activity))
+    }
+}
+
 struct tracetimeWidgetEntryView : View {
     @Environment(\.widgetFamily) var widgetFamily
     
     var entry: Provider.Entry
 
     var body: some View {
-        let targetCount: Int = {
-            switch self.widgetFamily {
-            case .systemMedium: return 4
-            case .systemSmall: return 4
-            default: return 8
-            }
-        }();
-        // https://forums.swift.org/t/padding-arrays/41041/2
-        let paddedActivities = entry.activities + Array(repeating: "", count: max(targetCount - entry.activities.count, 0))
-        VStack {
-            HStack {
-                Text("TRACK AGAIN")
-                    .font(.body)
-                    .fontWeight(.heavy)
-                    .fixedSize()
-                if widgetFamily != .systemSmall {
-                    Spacer()
-                        .frame(maxWidth: .infinity)
-                    Text(entry.record!.endTime, style: .timer)
-                        .frame(maxWidth: .infinity)
+        switch self.widgetFamily {
+        case .systemSmall:
+            SmallTracetimeWidgetEntryView(entry: entry)
+        default:
+            let targetCount: Int = {
+                switch self.widgetFamily {
+                case .systemMedium: return 4
+                case .systemSmall: return 4
+                default: return 8
                 }
-            }
-            .padding(8)
-            .frame(height: 50)
+            }();
+            // https://forums.swift.org/t/padding-arrays/41041/2
+            let paddedActivities = entry.activities + Array(repeating: "", count: max(targetCount - entry.activities.count, 0))
             VStack {
-                ForEach(Array(stride(from: 0, to: targetCount, by: 2)), id: \.self) { i in
-                    Divider()
-                    HStack {
-                        Text(paddedActivities[i])
-                            .fontWeight(.semibold)
-                            .foregroundColor(.blue)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                HStack {
+                    Text("TRACK AGAIN")
+                        .font(.body)
+                        .fontWeight(.heavy)
+                        .fixedSize()
+                    if widgetFamily != .systemSmall {
+                        Spacer()
+                            .frame(maxWidth: .infinity)
+                        Text(entry.record!.endTime, style: .timer)
+                            .frame(maxWidth: .infinity)
+                    }
+                }
+                .padding(8)
+                .frame(height: 50)
+                VStack {
+                    ForEach(Array(stride(from: 0, to: targetCount, by: 2)), id: \.self) { i in
                         Divider()
-                        Text(paddedActivities[i + 1])
-                            .fontWeight(.semibold)
-                            .foregroundColor(.blue)
-                            .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        HStack {
+                            Link(destination: createActivityUrl(activity: paddedActivities[i])) {
+                                Text(paddedActivities[i])
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.blue)
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            }
+                            Divider()
+                            Link(destination: createActivityUrl(activity: paddedActivities[i + 1])) {
+                                Text(paddedActivities[i + 1])
+                                    .fontWeight(.semibold)
+                                    .foregroundColor(.blue)
+                                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                            }
+                        }
                     }
                 }
             }
+            .padding(8)
         }
-        .padding(8)
     }
+}
+
+func createActivityUrl(activity: String) -> URL {
+    var components = URLComponents()
+    components.scheme = "tracetime"
+    components.host = "create"
+    components.queryItems = [
+        URLQueryItem(name: "activity", value: activity)
+    ]
+    print(components.url)
+    return components.url!
 }
 
 @main
