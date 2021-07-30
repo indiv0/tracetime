@@ -94,7 +94,8 @@ struct tracetimeWidgetEntryView : View {
                 if widgetFamily != .systemSmall {
                     Spacer()
                         .frame(maxWidth: .infinity)
-                    Text(entry.record!.endTime, style: .relative)
+                    Text(entry.record!.endTime, style: .timer)
+                        .frame(maxWidth: .infinity)
                 }
             }
             .padding(8)
