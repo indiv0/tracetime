@@ -85,7 +85,7 @@ struct SmallTracetimeWidgetEntryView : View {
         }
         .multilineTextAlignment(.center)
         .padding(8)
-        .widgetURL(createActivityUrl(activity: entry.record!.activity))
+        .widgetURL(createActivityUrl(activity: entry.record == nil ? nil : entry.record!.activity))
     }
 }
 
@@ -149,13 +149,15 @@ struct tracetimeWidgetEntryView : View {
     }
 }
 
-func createActivityUrl(activity: String) -> URL {
+func createActivityUrl(activity: String?) -> URL {
     var components = URLComponents()
     components.scheme = "tracetime"
     components.host = "create"
-    components.queryItems = [
-        URLQueryItem(name: "activity", value: activity)
-    ]
+    if activity != nil {
+        components.queryItems = [
+            URLQueryItem(name: "activity", value: activity)
+        ]
+    }
     print(components.url)
     return components.url!
 }

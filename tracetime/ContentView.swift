@@ -75,12 +75,17 @@ struct ContentView: View {
             .onOpenURL { url in
                 guard url.scheme == "tracetime" else { return }
                 guard url.host == "create" else { return }
-                guard let query = url.query else { return }
-                let components = query.split(separator: ",").flatMap { $0.split(separator: "=") }
-                guard let activityIndex = components.firstIndex(of: "activity") else { return }
-                guard activityIndex + 1 < components.count else { return }
                 
-                transientActivity = String(components[activityIndex + 1]).removingPercentEncoding!
+                transientActivity = ""
+                if let query = url.query {
+                    let components = query.split(separator: ",").flatMap { $0.split(separator: "=") }
+                    if let activityIndex = components.firstIndex(of: "activity") {
+                        if activityIndex + 1 < components.count {
+                            transientActivity = String(components[activityIndex + 1]).removingPercentEncoding!
+                        }
+                    }
+                }
+                
                 isAddRecordLinkActive = true
                 // Update the ID so that the `AddRecordSheet` `View` is replace entirely.
                 // This is less than ideal in terms of efficiency, but it's necessary to clear
