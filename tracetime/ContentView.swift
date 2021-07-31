@@ -11,17 +11,6 @@ import WidgetKit
 
 struct ContentView: View {
     
-    enum ActiveSheet: Identifiable {
-        case create(activity: String?), edit(record: Record)
-        
-        var id: Int {
-            switch self {
-            case .create: return 1
-            case .edit: return 2
-            }
-        }
-    }
-    
     @Environment(\.managedObjectContext) private var viewContext
     
     @FetchRequest(
@@ -34,8 +23,9 @@ struct ContentView: View {
         tmp.dateStyle = .short
         return tmp
     }
-    
-    @State var activeSheet: ActiveSheet?
+
+    @State private var transientActivity: String = ""
+    @State private var isAddRecordLinkActive: Bool = false
     
     var body: some View {
         NavigationView {
@@ -52,13 +42,9 @@ struct ContentView: View {
                                             .font(.subheadline)
                                     }
                                     Spacer()
-                                    Button(action: {
-                                        activeSheet = .edit(record: recordsDict[i][j])
-                                    }) {
-                                        Image(systemName: "pencil")
-                                            .imageScale(.large)
-                                            .foregroundColor(.blue)
-                                    }
+                                    NavigationLink(destination: {
+                                        EditRecordSheet(record: recordsDict[i][j], latest: i == 0 && j == 0)
+                                    }) {}
                             }
                             .frame(height: 50)
                         }
@@ -78,44 +64,27 @@ struct ContentView: View {
             }
             .listStyle(PlainListStyle())
             .navigationTitle("Records")
-            .navigationBarItems(trailing: Button(action: {
-                activeSheet = .create(activity: nil)
-            }, label: {
+            .navigationBarItems(trailing: NavigationLink(
+                destination: AddRecordSheet(transientActivity: transientActivity, previous: records.first),
+                isActive: $isAddRecordLinkActive
+            ) {
                 Image(systemName: "plus.circle")
                     .imageScale(.large)
-            }))
+            })
             .onOpenURL { url in
-                print(url)
                 guard url.scheme == "tracetime" else { return }
                 guard url.host == "create" else { return }
                 guard let query = url.query else { return }
                 let components = query.split(separator: ",").flatMap { $0.split(separator: "=") }
-                print(components)
                 guard let activityIndex = components.firstIndex(of: "activity") else { return }
                 guard activityIndex + 1 < components.count else { return }
-                print(String(components[activityIndex + 1]).removingPercentEncoding!)
-                activeSheet = .create(activity: String(components[activityIndex + 1]).removingPercentEncoding!)
-                print(activeSheet)
-            }
-            .sheet(item: $activeSheet) { item in
-                switch item {
-                case .create(let activity):
-                    let now = Date();
-                    if let record = records.first {
-                        AddRecordSheet(
-                            activity: activity ?? record.activity,
-                            // Every task must start at least one second
-                            // after the last task ended to ensure that they
-                            // can be sorted correctly.
-                            startTime: record.endTime.addingTimeInterval(1),
-                            endTime: now > record.endTime ? now : record.endTime
-                        )
-                    } else {
-                        AddRecordSheet(activity: activity ?? "", startTime: now, endTime: now)
-                    }
-                case .edit(let value):
-                    EditRecordSheet(record: value, last: records.first!.id! == value.id!)
+                
+                transientActivity = String(components[activityIndex + 1]).removingPercentEncoding!
+                if (isAddRecordLinkActive) {
+                    isAddRecordLinkActive.toggle()
                 }
+                isAddRecordLinkActive.toggle()
+                print("Create \(transientActivity)")
             }
         }.navigationViewStyle(StackNavigationViewStyle())
     }
@@ -125,14 +94,6 @@ struct ContentView: View {
             fmt.string(from: element.startTime)
         }.values.sorted() { $0[0].startTime > $1[0].startTime }
     }
-    
-    //func extendRecord(record: Record) {
-    //    let newEndTime = Date()
-    //    viewContext.performAndWait {
-    //        record.endTime = newEndTime
-    //        try? viewContext.save()
-    //    }
-    //}
 }
 
 struct ContentView_Previews: PreviewProvider {

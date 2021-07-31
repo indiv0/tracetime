@@ -16,17 +16,17 @@ struct EditRecordSheet: View {
     @ObservedObject var record: Record
     @State var activity: String
     @State var endTime: Date
-    var last: Bool
+    var latest: Bool
     
-    init(record: Record, last: Bool) {
+    init(record: Record, latest: Bool) {
         self.record = record
-        self.last = last
+        self.latest = latest
         self._activity = State(initialValue: record.activity)
         self._endTime = State(initialValue: record.endTime)
     }
     
     var body: some View {
-        NavigationView {
+        //NavigationView {
             Form {
                 Section(header: Text("Activity")) {
                     TextField("Activity Name", text: $activity)
@@ -38,7 +38,7 @@ struct EditRecordSheet: View {
                         Text(record.startTime, style: .date)
                         Text(record.startTime, style: .time)
                     }
-                    if last {
+                    if latest {
                         DatePicker("End", selection: $endTime, in: endTime...Date())
                     } else {
                         HStack {
@@ -51,11 +51,9 @@ struct EditRecordSheet: View {
                 }
             }
             .navigationTitle("Edit Record")
-            .navigationBarItems(leading: Button("Cancel") {
-                presentationMode.wrappedValue.dismiss()
-            }, trailing: Button("Save") {
+            .navigationBarItems(trailing: Button("Save") {
                 record.activity = activity;
-                if last {
+                if latest {
                     record.endTime = endTime;
                 }
                 viewContext.performAndWait {
@@ -65,8 +63,8 @@ struct EditRecordSheet: View {
                 }
                 presentationMode.wrappedValue.dismiss()
             })
-        }
-        .navigationViewStyle(StackNavigationViewStyle())
+        //}
+        //.navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
@@ -78,7 +76,7 @@ struct EditRecordSheet_Previews: PreviewProvider {
         record.activity = "Rave"
         record.endTime = Date()
         record.startTime = record.endTime.addingTimeInterval(-600)
-        return EditRecordSheet(record: record, last: true)
+        return EditRecordSheet(record: record, latest: true)
     }
 }
 
