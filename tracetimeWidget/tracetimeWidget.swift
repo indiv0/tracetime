@@ -75,13 +75,20 @@ struct SmallTracetimeWidgetEntryView : View {
 
     var body: some View {
         VStack {
-            Text("TRACK AGAIN")
-                .font(.body)
-                .fontWeight(.heavy)
-                .frame(maxHeight: .infinity)
-            Divider()
-            Text(entry.record!.endTime, style: .timer)
-                .frame(maxHeight: .infinity)
+            if let record = entry.record {
+                Text("TRACK AGAIN")
+                    .font(.body)
+                    .fontWeight(.heavy)
+                    .frame(maxHeight: .infinity)
+                Divider()
+                Text(record.endTime, style: .timer)
+                    .frame(maxHeight: .infinity)
+            } else {
+                Text("TRACK")
+                    .font(.body)
+                    .fontWeight(.heavy)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+            }
         }
         .multilineTextAlignment(.center)
         .padding(8)
@@ -95,10 +102,9 @@ struct tracetimeWidgetEntryView : View {
     var entry: Provider.Entry
 
     var body: some View {
-        switch self.widgetFamily {
-        case .systemSmall:
+        if self.widgetFamily == .systemSmall || self.entry.record == nil {
             SmallTracetimeWidgetEntryView(entry: entry)
-        default:
+        } else {
             let targetCount: Int = {
                 switch self.widgetFamily {
                 case .systemMedium: return 4
