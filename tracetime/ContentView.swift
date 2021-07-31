@@ -24,6 +24,7 @@ struct ContentView: View {
         return tmp
     }
 
+    @State private var addRecordSheetId = 0
     @State private var transientActivity: String = ""
     @State private var isAddRecordLinkActive: Bool = false
     
@@ -65,7 +66,7 @@ struct ContentView: View {
             .listStyle(PlainListStyle())
             .navigationTitle("Records")
             .navigationBarItems(trailing: NavigationLink(
-                destination: AddRecordSheet(transientActivity: transientActivity, previous: records.first),
+                destination: AddRecordSheet(transientActivity: transientActivity, previous: records.first).id(addRecordSheetId),
                 isActive: $isAddRecordLinkActive
             ) {
                 Image(systemName: "plus.circle")
@@ -80,10 +81,11 @@ struct ContentView: View {
                 guard activityIndex + 1 < components.count else { return }
                 
                 transientActivity = String(components[activityIndex + 1]).removingPercentEncoding!
-                if (isAddRecordLinkActive) {
-                    isAddRecordLinkActive.toggle()
-                }
-                isAddRecordLinkActive.toggle()
+                isAddRecordLinkActive = true
+                // Update the ID so that the `AddRecordSheet` `View` is replace entirely.
+                // This is less than ideal in terms of efficiency, but it's necessary to clear
+                // the state of the view.
+                addRecordSheetId += 1
                 print("Create \(transientActivity)")
             }
         }.navigationViewStyle(StackNavigationViewStyle())
