@@ -69,7 +69,7 @@ struct AddRecordSheet: View {
                         Text(startTime, style: .time)
                     }
                 }
-                DatePicker("End", selection: $endTime, in: startTime...endTime)
+                DatePicker("End", selection: $endTime, in: startTime...Date())
             }
         }
         .navigationTitle("Add Record")
