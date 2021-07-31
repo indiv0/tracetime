@@ -192,6 +192,12 @@ struct tracetimeWidget_Previews: PreviewProvider {
                 .previewContext(WidgetPreviewContext(family: .systemMedium))
             tracetimeWidgetEntryView(entry: SimpleEntry(record: record, date: Date(), activities: activities))
                 .previewContext(WidgetPreviewContext(family: .systemSmall))
+            tracetimeWidgetEntryView(entry: SimpleEntry(record: nil, date: Date(), activities: []))
+                .previewContext(WidgetPreviewContext(family: .systemLarge))
+            tracetimeWidgetEntryView(entry: SimpleEntry(record: nil, date: Date(), activities: []))
+                .previewContext(WidgetPreviewContext(family: .systemMedium))
+            tracetimeWidgetEntryView(entry: SimpleEntry(record: nil, date: Date(), activities: []))
+                .previewContext(WidgetPreviewContext(family: .systemSmall))
         }
     }
 }
